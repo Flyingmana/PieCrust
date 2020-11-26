@@ -1,7 +1,7 @@
 {
-    "name": "piecrust-php/piecrust",
-    "description": "A lightweight CMS and static website generator.",
-    "homepage": "https://github.com/giftnuss/PieCrust",
+    "name": "flyingmana/piecrust",
+    "description": "a personal fork of piecrust-php/piecrust from giftnuss/PieCrust: A lightweight CMS and static website generator.",
+    "homepage": "https://github.com/flyingmana/PieCrust",
     "license": "apache-2.0",
     "authors": [
         {
@@ -12,22 +12,6 @@
 			"name": "Mike Würfel",
 			"homepage": "https://hambacherforst.org"
 		}
-    ],
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "geshi/geshi",
-                "version": "1.0.8.11",
-                "dist": {
-                    "url":  "https://sourceforge.net/projects/geshi/files/geshi/GeSHi%201.0.8.11/GeSHi-1.0.8.11.zip/download",
-                    "type": "zip"
-                },
-                "autoload": {
-                    "classmap": [ "geshi.php" ]
-                }
-            }
-        }
     ],
     "require": {
         "php": ">= 7.1.0",
