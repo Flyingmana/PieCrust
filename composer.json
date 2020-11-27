@@ -27,7 +27,10 @@
         "apache/log4php": "^2.3",
         "league/commonmark": "^1.4",
         "ulrichsg/getopt-php": "^3.3.0",
-        "talesoft/tale-factory": "^0.3"
+        "talesoft/tale-factory": "^0.3",
+        "pear/console_getopt": "^1.4",
+        "pear/pear-core-minimal": "^1.10",
+        "pear/console_commandline": "^1.2"
 
     },
     "require-dev": {
@@ -40,6 +43,7 @@
         }
     },
     "bin": [
+        "piecrust.php",
         "piecrust"
     ]
 }
