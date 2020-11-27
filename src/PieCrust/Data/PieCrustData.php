@@ -19,11 +19,11 @@ class PieCrustData
     protected $pageData;
     protected $pageContentSegments;
     protected $wasCurrentPageCached;
-    
+
     public $version;
     public $url;
     public $branding;
-    
+
     public function __construct(IPieCrust $pieCrust, $siteData, $pageData, $pageContentSegments, $wasCurrentPageCached)
     {
         $this->pieCrust = $pieCrust;
@@ -31,28 +31,28 @@ class PieCrustData
         $this->pageData = $pageData;
         $this->pageContentSegments = $pageContentSegments;
         $this->wasCurrentPageCached = $wasCurrentPageCached;
-        
+
         $this->version = PieCrustDefaults::VERSION;
-        $this->url = 'http://bolt80.com/piecrust/';
-        $this->branding = 'Baked with <em><a href="'. $this->url . '">PieCrust</a> ' . $this->version . '</em>.';
+        $this->url = 'https://github.com/Flyingmana/PieCrust';
+        $this->branding = 'Baked with a custom Fork of <em><a href="'. $this->url . '">PieCrust</a> ' . $this->version . '</em>.';
     }
-    
+
     public function debug_info()
     {
         if (!$this->pieCrust->isDebuggingEnabled() or
             !$this->pieCrust->getConfig()->getValue('site/enable_debug_info'))
             return '';
-        
+
         $output = '<div id="piecrust-debug-info" style="' . DataStyles::CSS_DEBUGINFO . '">' . PHP_EOL;
-        
+
         $output .= '<div id="piecrust-cache-info">' . PHP_EOL;
         $output .= '<p style="' . DataStyles::CSS_P . '"><strong>PieCrust ' . PieCrustDefaults::VERSION . '</strong> &mdash; ' . PHP_EOL;
         if ($this->wasCurrentPageCached !== null)
         {
             $output .= ($this->wasCurrentPageCached ? "baked this morning" : "baked just now");
         }
-        
-        // If we have some execution info in the environment, 
+
+        // If we have some execution info in the environment,
         // add more information.
         if ($this->pieCrust->getEnvironment()->getExecutionContext() != null)
         {
@@ -71,13 +71,13 @@ class PieCrustData
 
         $output .= '</p>' . PHP_EOL;
         $output .= '</div>' . PHP_EOL;
-        
+
         if ($this->pageData or $this->pageContentSegments)
         {
             $output .= '<div id="piecrust-data-info">' . PHP_EOL;
             $output .= '<p style="' . DataStyles::CSS_P . ' cursor: pointer;" onclick="var l = document.getElementById(\'piecrust-data-list\'); if (l.style.display == \'none\') l.style.display = \'block\'; else l.style.display = \'none\';">';
             $output .= "<span style=\"" . DataStyles::CSS_BIGHEADER . "\">Template engine data</span> &mdash; click to toggle</a>.</p>" . PHP_EOL;
-            
+
             $data = array(
                 'Website data' => $this->siteData,
                 'Page data' => $this->pageData,
@@ -117,7 +117,7 @@ class PieCrustData
             $output .= '</div>' . PHP_EOL;
             $output .= '</div>' . PHP_EOL;
         }
-        
+
         $output .= '</div>';
         return $output;
     }

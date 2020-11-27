@@ -26,4 +26,13 @@ class Logger extends AbstractLogger
      {
          $this->_logger->setLevel($level);
      }
+
+     public function fatal($message)
+     {
+         if ($this->_logger instanceof \LoggerRoot) {
+             $this->_logger->fatal($message);
+         } else {
+             $this->_logger->emergency($message);
+         }
+     }
 }

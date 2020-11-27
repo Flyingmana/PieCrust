@@ -21,7 +21,11 @@ class DefaultLogger extends AbstractLogger
 
      public function log($level, $message, array $context = array())
      {
-         $this->_logger->$level($message);
+         if ($level == 'emergency' && $this->_logger instanceof \LoggerRoot) {
+             $this->_logger->fatal($message);
+         } else {
+             $this->_logger->$level($message);
+         }
      }
 
      public function setLevel($level)
