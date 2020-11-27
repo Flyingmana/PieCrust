@@ -19,6 +19,22 @@ if (!ini_get('date.timezone')) {
     ini_set('date.timezone', 'UTC');
 }
 
+
+if (php_sapi_name() == "cli") {
+    $libsDir = null;
+    if (is_dir('./vendor')) {
+        $libsDir = './vendor';
+    }
+    if( strpos($_SERVER['PHP_SELF'], '/vendor/' )!== false ) {
+        $libsDir = substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/vendor/' )).'/vendor';
+    }
+
+    if ($libsDir) {
+        require_once $libsDir . '/autoload.php';
+    }
+    unset($libsDir);
+}
+
 foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
     if (file_exists($file)) {
         define('PHPUNIT_COMPOSER_INSTALL', $file);
@@ -39,14 +55,15 @@ if (!defined('PHPUNIT_COMPOSER_INSTALL')) {
     die(1);
 }
 
-require PHPUNIT_COMPOSER_INSTALL;
+require_once PHPUNIT_COMPOSER_INSTALL;
 
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
 
 try {
    $returnCode = piecrust_command();
 } catch ( Exception $e ) {
-    fwrite(STDERR, $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+    //fwrite(STDERR, $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+    throw $e;
     die(2);
 }
 exit($returnCode);
@@ -178,6 +195,6 @@ function piecrust_command($userArgv = null, $profile = 'piecrust')
     piecrust_setup($profile);
 
     $chef = new PieCrust\Command\Command();
-    $chef->setup();
+    //$chef->setup();
     return $chef->run($userArgv);
 }
